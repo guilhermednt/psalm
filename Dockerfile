@@ -1,9 +1,9 @@
 # Set defaults
 
-ARG BASE_IMAGE="php:7.2-alpine"
+ARG BASE_IMAGE="php:7.4-alpine"
 ARG PACKAGIST_NAME="vimeo/psalm"
 ARG PHPQA_NAME="psalm"
-ARG VERSION="3.4.2"
+ARG VERSION="4.11.2"
 
 # Build image
 
@@ -23,7 +23,7 @@ RUN apk add --no-cache tini
 
 # Install Psalm - https://github.com/vimeo/psalm
 
-COPY --from=composer:1.6.5 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.1.10 /usr/bin/composer /usr/bin/composer
 RUN COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME="/composer" \
     composer global require --prefer-dist --no-progress --dev ${PACKAGIST_NAME}:${VERSION}
@@ -31,7 +31,7 @@ ENV PATH /composer/vendor/bin:${PATH}
 
 # Satisfy Psalm's quest for a composer autoloader (with a symlink that disappears once a volume is mounted at /app)
 
-RUN mkdir /app && ln -s /composer/vendor/ /app/vendor
+RUN mkdir /app && mkdir -p /.cache/psalm/ && chmod 0777 -R /.cache/ && ln -s /composer/vendor/ /app/vendor
 
 # Add entrypoint script
 
