@@ -1,9 +1,9 @@
 # Set defaults
 
-ARG BASE_IMAGE="php:7.4-alpine"
+ARG BASE_IMAGE="php:8.0-alpine"
 ARG PACKAGIST_NAME="vimeo/psalm"
 ARG PHPQA_NAME="psalm"
-ARG VERSION="4.11.2"
+ARG VERSION="4.15.0"
 
 # Build image
 
