@@ -3,7 +3,7 @@
 ARG BASE_IMAGE="php:8.0-alpine"
 ARG PACKAGIST_NAME="vimeo/psalm"
 ARG PHPQA_NAME="psalm"
-ARG VERSION="4.17.0"
+ARG VERSION="4.24.0"
 
 # Build image
 
